@@ -1,0 +1,8 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1 style="font-size: 40px">{{ new.title }}</h1>
+<div>{{ new.description|safe }}</div>
+
+    <a href = "{% url 'create-new' %}">Предложить новость</a>
+{% endblock %}
