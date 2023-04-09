@@ -8,14 +8,17 @@ from .forms import NewForm, RegistrationForm, AboutForm
 # Create your views here.
 def home(request):
     news = New.objects.order_by('-created')[:3]
-    about = About.objects.all()
-    context = {'news':news}
+    about = About.objects.get(id = 1)
+    context = {'news':news, 'about':about}
     return render(request, 'base/home.html', context)
 
 def new(request, pk):
     new = New.objects.get(id=pk)
-    count = New.objects.count()
-    context = {'new': new, 'count':count}
+    prev = New.objects.filter(id__lt=pk).last()
+    next = New.objects.filter(id__gt=pk).first()
+    prev_new = New.objects.filter(id__lt=pk).order_by('-id').first()
+    next_new = New.objects.filter(id__gt=pk).order_by('id').first()
+    context = {'new': new, 'prev':prev, 'next':next, 'prev_new':prev_new, 'next_new':next_new}
     return render(request, 'base/news.html', context)
 
 def loginPage(request):
@@ -71,9 +74,16 @@ def createNew(request):
     form = NewForm()
     if request.method == 'POST':
         form = NewForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
+        if 'preview' in request.POST:
+            if form.is_valid():
+                title = form.cleaned_data.get('title')
+                description = form.cleaned_data.get('description')
+                context = {'title':title, 'description':description}
+                return render(request, 'base/preview.html', context)
+        elif 'publish' in request.POST:
+            if form.is_valid():
+                form.save()
+                return redirect('home')
 
     context = {'form' : form}
     return render(request, 'base/new_form.html', context)
@@ -121,3 +131,9 @@ def editAbout(request):
     context = {'about':about, 'form':form}
 
     return render(request, 'base/edit-about.html', context)
+
+def preview(request):
+    if request.method == 'GET':
+        form_data = request.POST
+        context = {'form_data':form_data}
+        return render(request, 'preview.html', context)

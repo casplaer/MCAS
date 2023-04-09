@@ -10,6 +10,7 @@ urlpatterns = [
     path('edit-new/<str:pk>', views.editNew, name = 'edit-new'),
     path('edit-about/', views.editAbout, name = 'edit-about'),
     path('about/', views.about, name = 'about'),
+    path('preview/', views.preview, name = 'preview'),
 
     path('', views.home, name = 'home'),
     path('new/<str:pk>/', views.new, name = 'new'),
