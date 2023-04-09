@@ -13,6 +13,9 @@
             {% if user.status == 'admin' or user.is_staff %}
                 <a href= '{% url "register" %}'>Зарегистрировать нового пользователя</a>
             {% endif %}
+            {% if user.status == 'editor' %}
+                <a href = '{% url "create-new" %}'>Создать новую статью</a>
+            {% endif %}
             <a href="{% url 'logout' %}">Выйти</a>
         </form>
     </div>

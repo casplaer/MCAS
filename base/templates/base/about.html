@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <div>{{ about.description|safe }}</div>
+
+{% if request.user.status == 'admin' or request.user.is_staff %}
+
+    <a href="{% url 'edit-about' %}">Редактировать информацию</a>
+
+{% endif %}
+{% endblock content %}

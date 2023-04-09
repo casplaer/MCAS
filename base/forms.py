@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import New, User
+from .models import New, User, About
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.forms import UserCreationForm
 from ckeditor.fields import RichTextField
@@ -28,3 +28,12 @@ class RegistrationForm(UserCreationForm):
             'password1',
             'password2',
         ]
+
+
+class AboutForm(ModelForm):
+    class Meta:
+        model = About
+        fields = ['description']
+        widgets = {
+            'description': CKEditorWidget(),
+        }

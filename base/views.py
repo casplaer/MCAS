@@ -1,14 +1,14 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import New, User
-from django.contrib.auth.forms import UserCreationForm
+from .models import New, User, About
 from django.contrib.auth import authenticate, login, logout
-from .forms import NewForm, RegistrationForm
+from .forms import NewForm, RegistrationForm, AboutForm
 
 # Create your views here.
 def home(request):
     news = New.objects.order_by('-created')[:3]
+    about = About.objects.all()
     context = {'news':news}
     return render(request, 'base/home.html', context)
 
@@ -101,3 +101,23 @@ def editNew(request, pk):
 
     context = {'new':new, 'form':form}
     return render(request, 'base/edit-new.html', context)
+
+def about(request):
+    about = About.objects.get(id = 1)
+    context = {'about':about}
+    return render(request, 'base/about.html', context)
+
+def editAbout(request):
+    about = About.objects.get(id=1)
+    form = AboutForm()
+    if request.method == 'POST':
+        form = AboutForm(request.POST, instance=about)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = AboutForm(instance=about)
+
+    context = {'about':about, 'form':form}
+
+    return render(request, 'base/edit-about.html', context)

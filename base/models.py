@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 from ckeditor.fields import RichTextField
-import re
 # Create your models here.
+
 
 class User(AbstractUser):
     STATUS_CHOICES = (
@@ -29,3 +29,10 @@ class New(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class About(models.Model):
+    description = RichTextField(null = False, blank=False, verbose_name="Общая информация")
+
+    def __str__(self):
+        return self.description
