@@ -14,7 +14,8 @@ def home(request):
 
 def new(request, pk):
     new = New.objects.get(id=pk)
-    context = {'new': new}
+    count = New.objects.count()
+    context = {'new': new, 'count':count}
     return render(request, 'base/news.html', context)
 
 def loginPage(request):
@@ -78,6 +79,25 @@ def createNew(request):
     return render(request, 'base/new_form.html', context)
 
 def newsPage(request):
-    news = New.objects.all()
+    news = New.objects.order_by('-created')
     context = {'news' : news}
     return render(request, 'base/article_list.html', context)
+
+def deleteNew(request, pk):
+    new = New.objects.get(id=pk)
+    new.delete()
+    return redirect('news')
+
+def editNew(request, pk):
+    new = New.objects.get(id = pk)
+    form = NewForm()
+    if request.method == 'POST':
+        form = NewForm(request.POST, instance=new)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = NewForm(instance=new)
+
+    context = {'new':new, 'form':form}
+    return render(request, 'base/edit-new.html', context)
