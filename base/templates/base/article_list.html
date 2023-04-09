@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% for new in news %}
+        <div style="font-size: 25px; margin-bottom: 20px">
+            <a href = "{% url 'new' new.id %}">{{ new.title }}</a>
+        </div>
+    {% endfor %}
+    <a href = "{% url 'create-new' %}">Предложить новость</a>
+{% endblock %}
