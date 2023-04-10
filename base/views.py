@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import New, User, About
+from .models import New, User, About, Message
 from django.contrib.auth import authenticate, login, logout
 from .forms import NewForm, RegistrationForm, AboutForm
 
@@ -66,7 +66,8 @@ def registerPage(request):
 @login_required(login_url='/login')
 def userProfile(request, pk):
     user = User.objects.get(id = pk)
-    context = {'user' : user}
+    msgs = user.message_set.all().order_by('-created')
+    context = {'user' : user, 'msgs':msgs}
     return render(request, 'base/profile.html', context)
 
 @login_required(login_url = "/login")

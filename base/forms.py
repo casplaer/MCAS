@@ -3,7 +3,7 @@ from django import forms
 from .models import New, User, About
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.forms import UserCreationForm
-from ckeditor.fields import RichTextField
+#from ckeditor.fields import RichTextField
 
 
 class NewForm(ModelForm):
