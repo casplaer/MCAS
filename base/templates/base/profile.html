@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <div>
+        <form method="post" action="">
+            {% csrf_token %}
+
+            <img width="250px" height="250px" src = "{{ user.avatar.url }}"/>
+
+            <h6></h6>
+            {{user.username}}
+            {% if user.status == 'admin' or user.is_staff %}
+                <a href= '{% url "register" %}'>Зарегистрировать нового пользователя</a>
+            {% endif %}
+            {% if user.status == 'editor' %}
+                <a href = '{% url "create-new" %}'>Создать новую статью</a>
+            {% endif %}
+            <a href="{% url 'logout' %}">Выйти</a>
+        </form>
+    </div>
+
+{% endblock content %}

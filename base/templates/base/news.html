@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1 style="font-size: 40px; text-align: center">{{ new.title }}</h1>
+<div style="text-align: center">{{ new.description|safe }}</div>
+    <div style="text-align: center">
+        {% if prev %}
+            <a href="{% url 'new' prev_new.id %}">Предыдущая статья</a>
+        {% endif %}
+        {% if next %}
+            <a href="{% url 'new' next_new.id %}">Следующая статья</a>
+        {% endif %}
+    </div>
+    {% if requset.user.status == 'editor' or request.user.is_staff or request.user.status == 'editor'%}
+        <a href = "{% url 'edit-new' new.id %}">Изменить эту статью</a>
+    {% endif %}
+    <!--<a href = "{% url 'create-new' %}">Предложить новость</a>-->
+{% endblock %}

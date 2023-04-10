@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% for new in news %}
+        <div style="text-align:center;display: flex;flex-direction: column ;font-size: 25px;
+         margin-bottom: 20px; border: 1px solid black; height: 100px; width: 250px">
+            <a href = "{% url 'new' new.id %}">{{ new.title }}</a>
+            <a href="{% url 'delete-new' new.id %}" style="text-decoration: none; color: black;">
+              <span style="display: inline-block; width: 20px; height: 20px;
+               line-height: 20px; text-align: center; background-color: black; color: white;">X</span>
+            </a>
+        </div>
+    {% endfor %}
+    {% if request.user.status == 'editor' or request.user.is_staff %}
+        <a href = "{% url 'create-new' %}">Создать статью</a>
+    {% endif %}
+{% endblock %}

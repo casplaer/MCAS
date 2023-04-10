@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <input type="submit" value="Опубликовать" name="publish"/>
+        <input type="submit" value="Предпросмотр" name="preview"/>
+    </form>
+</div>
+
+{% endblock content %}
