@@ -85,8 +85,12 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mcas',
+        'USER': 'root',
+        'PASSWORD': '2287415963Zxc',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
