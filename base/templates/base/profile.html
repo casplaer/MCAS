@@ -13,6 +13,13 @@
             {% if user.status == 'admin' or user.is_staff %}<!-- Статус юзера - Админ-->
                 <a href= '{% url "register" %}'>Зарегистрировать нового пользователя</a>
                 <div>Отправить сообщение</div>
+                <div class="message-form">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <input type="text" name="body" placeholder="Текст сообщения"/>
+                </form>
+                </div>
+                <a href="{% url 'teacher-list' %}">Список всех учителей</a>
             {% endif %}
             {% if user.status == 'editor' %}<!-- Статус юзера - Редактор-->
                 <a href = '{% url "create-new" %}'>Создать новую статью</a>
@@ -20,7 +27,7 @@
             {% if request.user.is_staff or request.user.status == 'teacher' %}<!-- Статус юзера - Учитель-->
                 {% for msg in msgs %}
                     <div style="border: 1px solid black; width: 250px; height: 100px;">
-                        <div>Сообщение от администратора:
+                        <div>Сообщения от администратора:
                             {{ msg.user }} {{ msg.created|timesince }} назад</div>
                         <p>{{ msg.body }}</p>
                     </div>

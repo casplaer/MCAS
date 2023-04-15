@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 from ckeditor.fields import RichTextField
+from django.core.validators import FileExtensionValidator
 # Create your models here.
 
 
@@ -16,7 +17,7 @@ class User(AbstractUser):
     name = models.CharField(max_length=200, null = True)
     bio = models.TextField(null = True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True)
-    avatar = models.ImageField(null = True, default="default.jpg", verbose_name="Загрузите аватар для профиля")
+    avatar = models.ImageField(upload_to='files/images', null = True, default="images/default.jpg", verbose_name="Загрузите аватар для профиля")
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
@@ -45,5 +46,11 @@ class Message(models.Model):
     def __str__(self):
         return self.body
 
+class File(models.Model):
+    file_name = models.CharField(max_length=75, default='default_name')
+    file_upload = models.FileField(upload_to='midi',validators=[
+        FileExtensionValidator(allowed_extensions = ['mid', 'midi'])
+    ])
 
-
+    def __str__(self):
+        return self.file_name

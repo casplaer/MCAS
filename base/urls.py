@@ -11,6 +11,10 @@ urlpatterns = [
     path('edit-about/', views.editAbout, name = 'edit-about'),
     path('about/', views.about, name = 'about'),
     path('preview/', views.preview, name = 'preview'),
+    path('teacher-list/', views.teachers, name = 'teacher-list'),
+    path('music-library', views.musicLib, name = 'music-library'),
+    path('upload/', views.file_upload, name = 'file-upload'),
+    path('download/<str:pk>', views.download_file, name = 'file-download'),
 
     path('', views.home, name = 'home'),
     path('new/<str:pk>/', views.new, name = 'new'),

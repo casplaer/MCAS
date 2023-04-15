@@ -1,9 +1,12 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import New, User, About, Message
+from .models import New, User, About, Message, File
 from django.contrib.auth import authenticate, login, logout
-from .forms import NewForm, RegistrationForm, AboutForm
+from .forms import NewForm, RegistrationForm, AboutForm, FileUploadForm
+from django.shortcuts import get_object_or_404
+import os
 
 # Create your views here.
 def home(request):
@@ -67,6 +70,12 @@ def registerPage(request):
 def userProfile(request, pk):
     user = User.objects.get(id = pk)
     msgs = user.message_set.all().order_by('-created')
+    if request.method == 'POST':
+        msg = Message.objects.create(
+            user = request.user,
+            body=request.POST.get('body')
+        )
+        return redirect('user-profile', request.user.id)
     context = {'user' : user, 'msgs':msgs}
     return render(request, 'base/profile.html', context)
 
@@ -138,3 +147,31 @@ def preview(request):
         form_data = request.POST
         context = {'form_data':form_data}
         return render(request, 'preview.html', context)
+
+
+def teachers(request):
+    teacher_list = User.objects.filter(status='teacher')
+    context = {'teacher_list':teacher_list}
+    return render(request, 'base/teacher_list.html', context)
+
+def musicLib(request):
+    files = File.objects.all()
+    context = {'files':files}
+    return render(request, 'base/music_library.html', context)
+
+def file_upload(request):
+    if request.method == 'POST':
+        form = FileUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = FileUploadForm
+    context = {'form':form}
+    return render(request, 'base/file_upload.html', context)
+
+def download_file(request, pk):
+    file = get_object_or_404(File, id = pk)
+    response = HttpResponse(file.file_upload, content_type='midi, mid')
+    response['Content-Disposition'] = f'attachment; filename="{file.file_upload.name}"'
+    return response

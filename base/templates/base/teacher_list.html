@@ -1,0 +1,7 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% for teacher in teacher_list %}
+    <a href="{% url 'user-profile' teacher.id %}">{{ teacher.first_name }}</a>
+    {% endfor %}
+{% endblock content %}
