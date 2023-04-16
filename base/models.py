@@ -34,6 +34,8 @@ class New(models.Model):
 
 class About(models.Model):
     description = RichTextField(null = False, blank=False, verbose_name="Общая информация")
+    rewards = RichTextField(null=False, blank = False, verbose_name="Заслуги школы", default="Временно недоступно")
+    teachers = RichTextField(null=False, blank = False, verbose_name="Информация об учителях", default="Временно недоступно")
 
     def __str__(self):
         return self.description

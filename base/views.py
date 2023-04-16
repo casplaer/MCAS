@@ -175,3 +175,13 @@ def download_file(request, pk):
     response = HttpResponse(file.file_upload, content_type='midi, mid')
     response['Content-Disposition'] = f'attachment; filename="{file.file_upload.name}"'
     return response
+
+def rewards(request):
+    info = About.objects.get(id = 1)
+    context = {'info':info}
+    return render(request, 'base/rewards.html', context)
+
+def teachersInfo(request):
+    info = About.objects.get(id = 1)
+    context = {'info':info}
+    return render(request, 'base/teachers-info.html', context)

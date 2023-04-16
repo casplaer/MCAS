@@ -15,6 +15,8 @@ urlpatterns = [
     path('music-library', views.musicLib, name = 'music-library'),
     path('upload/', views.file_upload, name = 'file-upload'),
     path('download/<str:pk>', views.download_file, name = 'file-download'),
+    path('rewards/', views.rewards, name = 'rewards'),
+    path('teachers-info/', views.teachersInfo, name = 'teachers-info'),
 
     path('', views.home, name = 'home'),
     path('new/<str:pk>/', views.new, name = 'new'),
