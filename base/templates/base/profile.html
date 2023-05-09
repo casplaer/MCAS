@@ -12,6 +12,7 @@
             {{user.username}}
             {% if user.status == 'admin' or user.is_staff %}<!-- Статус юзера - Админ-->
                 <a href= '{% url "register" %}'>Зарегистрировать нового пользователя</a>
+                <a href = '{% url "new-event" %}'>Новое событие</a>
                 <div>Отправить сообщение</div>
                 <div class="message-form">
                 <form method="post" action="">

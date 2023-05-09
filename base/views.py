@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import New, User, About, Message, File, Event
 from django.contrib.auth import authenticate, login, logout
-from .forms import NewForm, RegistrationForm, AboutForm, FileUploadForm
+from .forms import NewForm, RegistrationForm, AboutForm, FileUploadForm, EventCreationForm
 from django.shortcuts import get_object_or_404
 import os
 
@@ -213,3 +213,15 @@ def pianoDepartment(request):
 def get_events(request):
     events = Event.objects.all().values('title', 'description', 'date')
     return JsonResponse(list(events), safe=False)
+
+
+def new_event(request):
+    form = EventCreationForm()
+    if request.method == 'POST':
+        form = EventCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'base/profile.html')
+
+    context = {'form' : form}
+    return render(request, 'base/new_event.html', context)
