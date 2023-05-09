@@ -9,11 +9,14 @@ from django.shortcuts import get_object_or_404
 import os
 
 # Create your views here.
+
+
 def home(request):
     news = New.objects.order_by('-created')[:3]
     about = About.objects.get(id = 1)
     context = {'news':news, 'about':about}
     return render(request, 'base/home.html', context)
+
 
 def new(request, pk):
     new = New.objects.get(id=pk)
@@ -23,6 +26,7 @@ def new(request, pk):
     next_new = New.objects.filter(id__gt=pk).order_by('id').first()
     context = {'new': new, 'prev':prev, 'next':next, 'prev_new':prev_new, 'next_new':next_new}
     return render(request, 'base/news.html', context)
+
 
 def loginPage(request):
     page = 'login'
@@ -46,15 +50,17 @@ def loginPage(request):
     context = {'page':page}
     return render(request, 'base/login_register.html', context)
 
+
 def logoutUser(requset):
     logout(requset)
     return redirect('home')
+
 
 def registerPage(request):
     form = RegistrationForm()
 
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = RegistrationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit = False)
             user.username = user.username.lower()
@@ -65,6 +71,7 @@ def registerPage(request):
             messages.error(request, 'Во время регистрации возникла ошибка')
 
     return render(request, 'base/login_register.html', {'form' : form})
+
 
 @login_required(login_url='/login')
 def userProfile(request, pk):
@@ -78,6 +85,7 @@ def userProfile(request, pk):
         return redirect('user-profile', request.user.id)
     context = {'user' : user, 'msgs':msgs}
     return render(request, 'base/profile.html', context)
+
 
 @login_required(login_url = "/login")
 def createNew(request):
@@ -98,15 +106,18 @@ def createNew(request):
     context = {'form' : form}
     return render(request, 'base/new_form.html', context)
 
+
 def newsPage(request):
     news = New.objects.order_by('-created')
     context = {'news' : news}
     return render(request, 'base/article_list.html', context)
 
+
 def deleteNew(request, pk):
     new = New.objects.get(id=pk)
     new.delete()
     return redirect('news')
+
 
 def editNew(request, pk):
     new = New.objects.get(id = pk)
@@ -122,10 +133,12 @@ def editNew(request, pk):
     context = {'new':new, 'form':form}
     return render(request, 'base/edit-new.html', context)
 
+
 def about(request):
     about = About.objects.get(id = 1)
     context = {'about':about}
     return render(request, 'base/about.html', context)
+
 
 def editAbout(request):
     about = About.objects.get(id=1)
@@ -142,11 +155,12 @@ def editAbout(request):
 
     return render(request, 'base/edit-about.html', context)
 
+
 def preview(request):
     if request.method == 'GET':
         form_data = request.POST
         context = {'form_data':form_data}
-        return render(request, 'preview.html', context)
+        return render(request, 'base/preview.html', context)
 
 
 def teachers(request):
@@ -154,10 +168,12 @@ def teachers(request):
     context = {'teacher_list':teacher_list}
     return render(request, 'base/teacher_list.html', context)
 
+
 def musicLib(request):
     files = File.objects.all()
     context = {'files':files}
     return render(request, 'base/music_library.html', context)
+
 
 def file_upload(request):
     if request.method == 'POST':
@@ -170,18 +186,25 @@ def file_upload(request):
     context = {'form':form}
     return render(request, 'base/file_upload.html', context)
 
+
 def download_file(request, pk):
     file = get_object_or_404(File, id = pk)
     response = HttpResponse(file.file_upload, content_type='midi, mid')
     response['Content-Disposition'] = f'attachment; filename="{file.file_upload.name}"'
     return response
 
+
 def rewards(request):
     info = About.objects.get(id = 1)
     context = {'info':info}
     return render(request, 'base/rewards.html', context)
 
+
 def teachersInfo(request):
     info = About.objects.get(id = 1)
     context = {'info':info}
     return render(request, 'base/teachers-info.html', context)
+
+
+def pianoDepartment(request):
+    return render(request, 'base/piano_department.html')

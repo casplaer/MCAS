@@ -1,32 +1,27 @@
-<a href="/">
-    <h1 style="text-align: center">LOGO MCAS</h1>
-</a>
+{% load static %}
 
-<div style="text-align: right;">
-    {% if request.user.is_authenticated %}
-        <p>Добро пожаловать, {{ request.user }}</p>
-        <a href="{% url 'logout' %}">Выйти</a>
-    {% else %}
-        <a href="{% url 'login' %}">Войти</a>
-    {% endif %}
-</div>
+<header class="bg-secondary">
+            <nav class="navbar navbar-dark navbar-expand-lg pb-3 pt-3 shadow-none">
+                <div class="container"> <a class="navbar-brand text-white" href="/"> <img src="{% static 'images/front/emblem.png' %}" alt="Логотип" class="me-2"> <span class="align-middle fw-bold h4 ms-1">МДШИ</span></a>
+                    <button class="navbar-toggler rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown-2" aria-controls="navbarNavDropdown-2" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse " id="navbarNavDropdown-2">
+                        <ul class="ms-auto navbar-nav">
+                            <li class="nav-item"> <a class="active nav-link pb-lg-3 pe-lg-4 ps-lg-4 pt-lg-3" aria-current="page" href="/">Главная</a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link pb-lg-3 pe-lg-4 ps-lg-4 pt-lg-3" href="#">Музыкальная библиотека</a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link pb-lg-3 pe-lg-4 ps-lg-4 pt-lg-3" href="{% url 'user-profile' user.id %}">Личный кабинет</a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link pb-lg-3 pe-lg-4 ps-lg-4 pt-lg-3" href="#">Новости</a>
+                            </li>
+                            <li class="nav-item">
+</li>
+                            <li class="nav-item">
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+</header>
 
-<div style="margin-bottom: 20px;display: flex; height: 35px; border: 1px solid black; ">
-
-  <div style="width: 25%; border-right: 1px solid black;">
-      <a href = '{% url "home" %}'>Главная страница</a>
-  </div>
-
-  <div style="width: 25%;border-right: 1px solid black;">
-      <a href="{% url 'news' %}">Новости</a>
-  </div>
-
-  <div style="width: 25%;border-right: 1px solid black;">
-      <a href="{% url 'music-library' %}">Музыкальная библиотека</a>
-  </div>
-
-  <div style="width: 25%;">
-      <a href="{% url 'user-profile' user.id %}">Личный кабинет</a>
-  </div>
-
-</div>

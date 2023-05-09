@@ -72,13 +72,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mcas.wsgi.application'
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/files/'
+MEDIA_URL = '/images/'
 
 STATICFILES_DIRS =[
     BASE_DIR/'static'
 ]
 
-MEDIA_ROOT = BASE_DIR / 'static/files'
+MEDIA_ROOT = BASE_DIR / 'static/'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

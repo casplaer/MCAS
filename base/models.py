@@ -17,7 +17,9 @@ class User(AbstractUser):
     name = models.CharField(max_length=200, null = True)
     bio = models.TextField(null = True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True)
-    avatar = models.ImageField(upload_to='files/images', null = True, default="images/default.jpg", verbose_name="Загрузите аватар для профиля")
+    avatar = models.ImageField(upload_to='images/', null=True,
+                               default="images/profile-pictures/default.jpg",
+                               verbose_name="Загрузите аватар для профиля")
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []

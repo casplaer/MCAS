@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .home-container
+    {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+
+</style>
+
+<div class="home-container">
+    <div style="display: flex; flex-direction: column">
+        <div style="height: 50px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px; margin-top: 10px">
+            Красивая кнопка
+        </div>
+        <div style="height: 50px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px; margin-top: 10px">
+            Красивая кнопка
+        </div>
+        <div style="height: 50px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px; margin-top: 10px">
+            Красивая кнопка
+        </div>
+        <div style="height: 50px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px; margin-top: 10px">
+            Красивая кнопка
+        </div>
+        <div style="height: 50px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px; margin-top: 10px">
+            Красивая кнопка
+        </div>
+        <div style="height: 50px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px; margin-top: 10px">
+            Красивая кнопка
+        </div>
+        <div style="height: 100px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px; margin-top: 10px">
+            Календарь культурно-массовых мероприятий
+        </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+
+      <div style="height: 100px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px; margin-top: 10px">
+          <a href="{% url 'about' %}">
+              {{ about.description|safe|truncatechars:50 }}</a>
+      </div>
+
+      <div style="height: 125px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px">
+          <a href="{% url 'rewards' %}">Заслуги школы</a>
+      </div>
+
+      <div style="height: 125px; border: 1px solid black; margin-bottom: 10px; margin-right: 10px">
+          <a href="{% url 'teachers-info' %}">Информация об учителях</a>
+      </div>
+
+      <div style="height: 20px; border: 1px solid black; font-size: 10px; margin-right: 10px">
+          Предложение перейти на страницы отделений для более подробного ознакомления
+      </div>
+
+    </div>
+
+    <div>
+        <div style="display: flex; flex-direction: column;">
+
+            {% for new in news %}
+                <div style="border: 1px solid black; height: 100px; margin-top: 10px; margin-bottom: 10px">
+                    <a href="{% url 'new' new.id %}">{{ new.title }}</a>
+                </div>
+            {% endfor %}
+
+            <hr style="width: 464px">
+                {% if request.user.is_staff or request.user.status == "editor" %}
+                    <a href="/create-new/">Создать статью</a>
+                {% endif %}
+        </div>
+    </div>
+
+</div>
+
+    <hr>
+    <h6>Контактные телефоны и почта:</h6>
+    <h6>Время работы:</h6>
+    <h6>Адрес:</h6>
+
+{% endblock content %}

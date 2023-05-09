@@ -17,6 +17,7 @@ urlpatterns = [
     path('download/<str:pk>', views.download_file, name = 'file-download'),
     path('rewards/', views.rewards, name = 'rewards'),
     path('teachers-info/', views.teachersInfo, name = 'teachers-info'),
+    path('piano-dep/', views.pianoDepartment, name='piano-dep'),
 
     path('', views.home, name = 'home'),
     path('new/<str:pk>/', views.new, name = 'new'),
