@@ -18,6 +18,7 @@ urlpatterns = [
     path('rewards/', views.rewards, name = 'rewards'),
     path('teachers-info/', views.teachersInfo, name = 'teachers-info'),
     path('piano-dep/', views.pianoDepartment, name='piano-dep'),
+    path('events/', views.get_events, name='events'),
 
     path('', views.home, name = 'home'),
     path('new/<str:pk>/', views.new, name = 'new'),

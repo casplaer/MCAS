@@ -58,3 +58,9 @@ class File(models.Model):
 
     def __str__(self):
         return self.file_name
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=200, null=False)
+    description = models.TextField(null=True)
+    date = models.DateTimeField()

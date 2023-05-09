@@ -20,7 +20,11 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
           locale: 'ru',
           initialView: 'dayGridMonth',
-          firstDay: 1
+          firstDay: 1,
+          events:{
+            url:{% url 'events' %},
+            method: 'GET',
+          }
         });
         calendar.render();
       });

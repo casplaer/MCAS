@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
-from .models import New, User, About, Message, File
+from .models import New, User, About, Message, File, Event
 from django.contrib.auth import authenticate, login, logout
 from .forms import NewForm, RegistrationForm, AboutForm, FileUploadForm
 from django.shortcuts import get_object_or_404
@@ -208,3 +208,8 @@ def teachersInfo(request):
 
 def pianoDepartment(request):
     return render(request, 'base/piano_department.html')
+
+
+def get_events(request):
+    events = Event.objects.all().values('title', 'description', 'date')
+    return JsonResponse(list(events), safe=False)
