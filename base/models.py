@@ -52,9 +52,7 @@ class Message(models.Model):
 
 class File(models.Model):
     file_name = models.CharField(max_length=75, default='default_name')
-    file_upload = models.FileField(upload_to='midi',validators=[
-        FileExtensionValidator(allowed_extensions = ['mid', 'midi'])
-    ])
+    file_upload = models.FileField(upload_to='library')
 
     def __str__(self):
         return self.file_name
