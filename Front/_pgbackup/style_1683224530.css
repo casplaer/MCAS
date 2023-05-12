@@ -1,0 +1,29 @@
+@media (max-width:991px) {
+    body.poster {
+        margin-top: 60vh;
+    }
+}
+
+body.poster {
+    background-attachment: fixed;
+}
+
+.top-5 {
+    top: 5px;
+}
+
+.row-1 {
+    width: 50%;
+    justify-content: center ;
+}
+
+.row-2 {
+    width: 50%;
+}
+
+.otdelenie-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
