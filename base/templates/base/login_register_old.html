@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if page == 'login' %}
+
+    <div>
+        <form method="post" action="">
+            {% csrf_token %}
+
+            <label>Логин:</label>
+            <input type="text" name="username" placeholder="Введите логин">
+
+            <label>Пароль:</label>
+            <input type="password" name="password" placeholder="Введите пароль">
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+{% else %}
+    <div>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+{% endif %}
+{% endblock content%}

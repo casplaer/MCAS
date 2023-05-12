@@ -33,10 +33,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'phonenumber_field',
 
     'base.apps.BaseConfig',
     'ckeditor',
 ]
+
+PHONENUMBER_DEFAULT_FORMAT = "NATIONAL"
+
+PHONENUMBER_DEFAULT_REGION = "BY"
 
 AUTH_USER_MODEL = 'base.User'
 

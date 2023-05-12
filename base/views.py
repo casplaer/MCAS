@@ -6,7 +6,7 @@ from .models import New, User, About, Message, File, Event
 from django.contrib.auth import authenticate, login, logout
 from .forms import NewForm, RegistrationForm, AboutForm, FileUploadForm, EventCreationForm
 from django.shortcuts import get_object_or_404
-import os
+
 
 # Create your views here.
 
@@ -41,6 +41,7 @@ def loginPage(request):
         user = authenticate(request, username = username, password = password)
 
         if user is not None:
+
             login(request, user)
             return redirect('home')
         else:
@@ -210,9 +211,39 @@ def pianoDepartment(request):
     return render(request, 'base/piano_department.html')
 
 
-def get_events(request):
-    events = Event.objects.all().values('title', 'description', 'date')
+def get_piano(request):
+    events = Event.objects.filter(department='piano').values('title', 'description', 'date')
     return JsonResponse(list(events), safe=False)
+
+
+def get_strings(request):
+    events = Event.objects.filter(department="strings").values('title', 'description', 'date')
+    return JsonResponse(list(events), safe=False)
+
+
+def get_folk(request):
+    events = Event.objects.filter(department="folk").values('title', 'description', 'date')
+    return JsonResponse(list(events), safe=False)
+
+
+def get_string_folk(request):
+    events = Event.objects.filter(department="string-folk").values('title', 'description', 'date')
+    return JsonResponse(list(events), safe=False)
+
+
+def get_choir(request):
+    events = Event.objects.filter(department="choir").values('title', 'description', 'date')
+    return JsonResponse(list(events), safe=False)
+
+
+def get_theory(request):
+    events = Event.objects.filter(department="theory").values('title', 'description', 'date')
+    return JsonResponse(list(events), safe=False)
+
+
+#def get_uni(request, pk):
+    # events = Event.objects.filter(department=pk).values('title', 'description', 'date')
+    # return JsonResponse(list(events), safe=False)
 
 
 def new_event(request):
@@ -225,3 +256,14 @@ def new_event(request):
 
     context = {'form' : form}
     return render(request, 'base/new_event.html', context)
+
+
+def contingent(request):
+    users = User.objects.filter(status='student')
+    context = {'users':users}
+    return render(request, 'base/contingent.html', context)
+
+
+def student_info(request, pk):
+    student = User.objects.get(id=pk)
+    return render(request, 'base/student_info.html', student)

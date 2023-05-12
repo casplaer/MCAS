@@ -22,8 +22,20 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = [
             'username',
-            'first_name',
-            'last_name',
+            'f',
+            'i',
+            'o',
+            'department_name',
+            'teacher_name',
+            'instrument_name',
+            'teacher_number',
+            'years',
+            'start_year',
+            'user_number',
+            'parent_first_name',
+            'parent_first_number',
+            'parent_second_name',
+            'parent_second_number',
             'avatar',
             'status',
             'password1',
@@ -49,4 +61,4 @@ class FileUploadForm(forms.ModelForm):
 class EventCreationForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['title', 'description', 'date']
+        fields = ['title', 'description', 'date', 'department']
