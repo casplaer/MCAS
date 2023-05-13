@@ -267,3 +267,8 @@ def contingent(request):
 def student_info(request, pk):
     student = User.objects.get(id=pk)
     return render(request, 'base/student_info.html', student)
+
+
+def diary(request):
+    context = {'tasks':1}
+    return render(request, 'base/diary.html')

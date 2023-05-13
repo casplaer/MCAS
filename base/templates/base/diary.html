@@ -1,0 +1,296 @@
+{% extends 'main.html' %}
+
+{% load static %}
+{% block content %}
+    <head>
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+        <meta name="description" content=""> 
+        <meta name="author" content=""> 
+        <!-- Bootstrap core CSS -->         
+        <link href="{% static 'styles/bootstrap_theme/bootstrap.css' %}" rel="stylesheet" type="text/css">
+        <!-- Custom styles for this template -->         
+        <link rel="stylesheet" href="{% static 'styles/blocks.css' %}">
+        <link href="{% static 'styles/style.css' %}" rel="stylesheet">
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js'></script>         
+        <link rel="stylesheet" href="{% static 'styles/diary.css' %}">
+        <title>Струнное отделение</title>         
+    </head>
+        <main> 
+            <section class="bg-light pb-5 pt-5 teachers" style="display: flex;"> 
+
+                <div class="tables">
+                    <div class="s_table">
+                        <h3>Понедельник</h3>
+                        <div class="table-responsive">
+                            <table class="table"> 
+                                <thead> 
+                                    <tr> 
+                                        <th scope="col">Дата</th> 
+                                        <th scope="col">Предмет</th> 
+                                        <th scope="col">Домашнее задание</th> 
+                                        <th scope="col">Оценка</th> 
+                                    </tr>                                     
+                                </thead>                                 
+                                <tbody> 
+                                    <tr> 
+                                        <th rowspan="5" class="date" id="mon-date">1</th> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td>
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>
+                                    <tr> 
+                                        <td></td> 
+                                        <td> </td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                </tbody>                                 
+                            </table>
+                        </div>
+                    </div>
+                    <div class="s_table">
+                        <h3>Вторник</h3>
+                        <div class="table-responsive">
+                            <table class="table"> 
+                                <thead> 
+                                    <tr> 
+                                        <th scope="col">Дата</th> 
+                                        <th scope="col">Предмет</th> 
+                                        <th scope="col">Домашнее задание</th> 
+                                        <th scope="col">Оценка</th> 
+                                    </tr>                                     
+                                </thead>                                 
+                                <tbody> 
+                                    <tr> 
+                                        <th rowspan="5" class="date" id="tue-date">1</th> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td>
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>
+                                    <tr> 
+                                        <td></td> 
+                                        <td> </td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                           
+                                </tbody>                                 
+                            </table>
+                        </div>
+                    </div>
+                    <div class="s_table">
+                        <h3>Среда</h3>
+                        <div class="table-responsive">
+                            <table class="table"> 
+                                <thead> 
+                                    <tr> 
+                                        <th scope="col">Дата</th> 
+                                        <th scope="col">Предмет</th> 
+                                        <th scope="col">Домашнее задание</th> 
+                                        <th scope="col">Оценка</th> 
+                                    </tr>                                     
+                                </thead>                                 
+                                <tbody> 
+                                    <tr> 
+                                        <th rowspan="5" class="date" id="wed-date">1</th> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td>
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>
+                                    <tr> 
+                                        <td></td> 
+                                        <td> </td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                            
+                                </tbody>                                 
+                            </table>
+                        </div>
+                    </div>
+                    <div class="s_table">
+                        <h3>Четверг</h3>
+                        <div class="table-responsive">
+                            <table class="table"> 
+                                <thead> 
+                                    <tr> 
+                                        <th scope="col">Дата</th> 
+                                        <th scope="col">Предмет</th> 
+                                        <th scope="col">Домашнее задание</th> 
+                                        <th scope="col">Оценка</th> 
+                                    </tr>                                     
+                                </thead>                                 
+                                <tbody> 
+                                    <tr> 
+                                        <th rowspan="5" class="date" id="thu-date">1</th> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td>
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>
+                                    <tr> 
+                                        <td></td> 
+                                        <td> </td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                         
+                                </tbody>                                 
+                            </table>
+                        </div>
+                    </div>
+                    <div class="s_table">
+                        <h3>Пятница</h3>
+                        <div class="table-responsive">
+                            <table class="table"> 
+                                <thead> 
+                                    <tr> 
+                                        <th scope="col">Дата</th> 
+                                        <th scope="col">Предмет</th> 
+                                        <th scope="col">Домашнее задание</th> 
+                                        <th scope="col">Оценка</th> 
+                                    </tr>                                     
+                                </thead>                                 
+                                <tbody> 
+                                    <tr> 
+                                        <th rowspan="5" class="date" id="fri-date">1</th> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td>
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>
+                                    <tr> 
+                                        <td></td> 
+                                        <td> </td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                            
+                                </tbody>                                 
+                            </table>
+                        </div>
+                    </div>
+                    <div class="s_table">
+                        <h3>Суббота</h3>
+                        <div class="table-responsive">
+                            <table class="table"> 
+                                <thead> 
+                                    <tr> 
+                                        <th scope="col">Дата</th> 
+                                        <th scope="col">Предмет</th> 
+                                        <th scope="col">Домашнее задание</th> 
+                                        <th scope="col">Оценка</th> 
+                                    </tr>                                     
+                                </thead>                                 
+                                <tbody> 
+                                    <tr> 
+                                        <th rowspan="5" class="date" id="sat-date">1</th> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td>
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>
+                                    <tr> 
+                                        <td></td> 
+                                        <td> </td> 
+                                        <td></td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td></td> 
+                                        <td></td> 
+                                        <td></td> 
+                                    </tr>                                         
+                                </tbody>                                 
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>             
+
+                <div class="container pb-3 pt-3"> 
+</div>                 
+            </section>             
+        </main>         
+
+</div>                 
+            </div>             
+        </footer>         
+        <script src="{% static 'styles/assets/js/popper.min.js' %}"></script>
+        <script src="{% static 'styles/bootstrap/js/bootstrap.min.js' %}"></script>
+    </body>
+{% endblock content %}

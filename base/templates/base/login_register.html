@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% if page == 'login' %}
 <html lang="ru">
     <head> 
         <meta charset="UTF-8"> 
@@ -29,5 +30,16 @@
         </div>
     </body>     
 </html>
+{% else %}
+    <div>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+{% endif %}
 
 {% endblock %}

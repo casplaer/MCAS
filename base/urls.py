@@ -28,6 +28,7 @@ urlpatterns = [
     path('new-event/', views.new_event, name='new-event'),
     path('contingent/', views.contingent, name='contingent'),
     path('student-info/<str:pk>', views.student_info, name='student-info'),
+    path('diary/', views.diary, name='diary'),
 
     path('', views.home, name = 'home'),
     path('new/<str:pk>/', views.new, name = 'new'),
