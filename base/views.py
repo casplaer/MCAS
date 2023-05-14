@@ -1,10 +1,13 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, FileResponse
 from django.contrib.auth.decorators import login_required
-from .models import New, User, About, Message, File, Event, Task, GroupNumber, Subject
+from .models import New, User, About, Message, File, Event,\
+    Task, UserFiles
 from django.contrib.auth import authenticate, login, logout
-from .forms import NewForm, RegistrationForm, AboutForm, FileUploadForm, EventCreationForm, TaskCreationForm
+from .forms import NewForm, RegistrationForm, AboutForm, \
+    FileUploadForm, EventCreationForm, TaskCreationForm, \
+    FileUUploadForm
 from django.shortcuts import get_object_or_404
 
 
@@ -33,7 +36,6 @@ def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username').lower()
         password = request.POST.get('password')
-        print(username, password)
 
         try:
             user = User.objects.get(username = username)
@@ -79,7 +81,7 @@ def registerPage(request):
 def userProfile(request, pk):
     user = User.objects.get(id = pk)
     msgs = user.message_set.all().order_by('-created')
-    #subjects = user.subjects.filter()
+    files = UserFiles.objects.filter(user=user)
     tasks = Task.objects.filter(groups__in=user.groups.all())
     if request.method == 'POST':
         msg = Message.objects.create(
@@ -88,7 +90,7 @@ def userProfile(request, pk):
         )
         return redirect('user-profile', request.user.id)
     context = {'user' : user, 'msgs':msgs, 'tasks':
-               tasks}
+               tasks, 'files':files}
     return render(request, 'base/profile.html', context)
 
 
@@ -192,9 +194,29 @@ def file_upload(request):
     return render(request, 'base/file_upload.html', context)
 
 
+def file_uupload(request):
+    if request.method == 'POST':
+        form = FileUUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = FileUUploadForm
+    context = {'form':form}
+    return render(request, 'base/file_upload.html', context)
+
+
 def download_file(request, pk):
     file = get_object_or_404(File, id = pk)
-    response = HttpResponse(file.file_upload, content_type='midi, mid')
+    response = HttpResponse(file.file_upload)
+    response['Content-Disposition'] = f'attachment; filename="{file.file_upload.name}"'
+    return response
+
+
+def download_ufile(request, pk):
+    file = get_object_or_404(UserFiles, id = pk)
+    response = HttpResponse(file.file_upload)
+    print(file.file_upload)
     response['Content-Disposition'] = f'attachment; filename="{file.file_upload.name}"'
     return response
 

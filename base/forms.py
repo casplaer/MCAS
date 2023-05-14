@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import New, User, About, File, Event, Task
+from .models import New, User, About, File, Event, Task, UserFiles
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.forms import UserCreationForm
 #from ckeditor.fields import RichTextField
@@ -56,6 +56,12 @@ class FileUploadForm(forms.ModelForm):
     class Meta:
         model = File
         fields = ['file_upload', 'file_name']
+
+
+class FileUUploadForm(forms.ModelForm):
+    class Meta:
+        model = UserFiles
+        fields = '__all__'
 
 
 class EventCreationForm(forms.ModelForm):

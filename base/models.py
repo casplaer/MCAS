@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from phonenumber_field.modelfields import PhoneNumberField
+import os
 from django.core.validators import RegexValidator
 
 # Create your models here.
@@ -61,8 +62,6 @@ class User(AbstractUser):
 
 
 
-
-
 class New(models.Model):
     title = models.CharField(max_length=256, verbose_name="Название статьи")
     description = RichTextField(null = False, blank = False, max_length = 100000, verbose_name="Подробное описание статьи")
@@ -88,9 +87,17 @@ class Message(models.Model):
     def __str__(self):
         return self.body
 
+
 class File(models.Model):
     file_name = models.CharField(max_length=75, default='default_name')
     file_upload = models.FileField(upload_to='library')
+
+    def __str__(self):
+        return self.file_name
+
+
+class UserFiles(File):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.file_name
