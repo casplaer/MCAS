@@ -20,11 +20,11 @@
             <div class="form" id="login-form">
                 <div class="form__title"> Авторизация </div>
                 <a href="#" class="popup__close" onclick="history.back()">X</a> 
-                <form class="login-form" method="post">
+                <form class="login-form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input name="username" type="text" placeholder="Имя пользователя"/>
                     <input name="password" type="password" placeholder="Пароль"/>
-                    <button>Вход</button>
+                    <button type="submit">Вход</button>
                 </form>
             </div>
         </div>

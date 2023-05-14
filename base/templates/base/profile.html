@@ -36,8 +36,13 @@
 
                 <a href = '{% url "contingent" %}'>Контингент</a>
             {% endif %}
+            <a href="{% url 'homework' %}">Новое ДЗ</a  >
             <a href="{% url 'diary' %}">Дневник</a>
             <a href="{% url 'logout' %}">Выйти</a>
+        {% for task in tasks %}
+            <div>{{ task.description }}</div>
+            <div>{{ task.sub }}</div>
+        {% endfor %}
         </form>
     </div>
 

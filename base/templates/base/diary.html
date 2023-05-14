@@ -18,7 +18,11 @@
         <title>Струнное отделение</title>         
     </head>
         <main> 
-            <section class="bg-light pb-5 pt-5 teachers" style="display: flex;"> 
+            <section class="bg-light pb-5 pt-5 teachers" style="display: flex;">
+
+                {% for task in tasks %}
+                    <div>{{ task.description }}</div>
+                {% endfor %}
 
                 <div class="tables">
                     <div class="s_table">

@@ -29,6 +29,8 @@ urlpatterns = [
     path('contingent/', views.contingent, name='contingent'),
     path('student-info/<str:pk>', views.student_info, name='student-info'),
     path('diary/', views.diary, name='diary'),
+    path('homework/', views.homework, name='homework'),
+
 
     path('', views.home, name = 'home'),
     path('new/<str:pk>/', views.new, name = 'new'),

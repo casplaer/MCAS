@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import New, User, About, File, Event
+from .models import New, User, About, File, Event, Task
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.forms import UserCreationForm
 #from ckeditor.fields import RichTextField
@@ -62,3 +62,9 @@ class EventCreationForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['title', 'description', 'date', 'department']
+
+
+class TaskCreationForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = '__all__'

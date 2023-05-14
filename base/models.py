@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from phonenumber_field.modelfields import PhoneNumberField
 from django.core.validators import RegexValidator
@@ -9,6 +9,17 @@ from django.core.validators import RegexValidator
 class GroupNumber(models.Model):
     number = models.CharField(max_length=25, blank=False, null=False, default='Номер группы')
 
+    def __str__(self):
+        return self.number
+
+
+class Subject(models.Model):
+    group = models.BooleanField(null=False, blank=False, default=False, verbose_name="Групповое")
+    name = models.CharField(max_length=50, null=False, default='Предмет', verbose_name="Название предмета")
+    teacher = models.CharField(max_length=100, null=True, verbose_name="Учитель")
+
+    def __str__(self):
+        return self.name
 
 
 class User(AbstractUser):
@@ -41,10 +52,15 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='images/', null=True,
                                default="images/profile-pictures/default.jpg",
                                verbose_name="Загрузите аватар для профиля")
-    #groups = models.ManyToManyField(GroupNumber, blank=True)
+    groups = models.ManyToManyField(GroupNumber, blank=True)
+    subjects = models.ManyToManyField(Subject, blank=True)
+ 
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
+
+
+
 
 
 class New(models.Model):
@@ -97,5 +113,14 @@ class Event(models.Model):
 
 
 class Task(models.Model):
-    groups = models.ManyToManyField(GroupNumber, blank=True)
+    grouped = models.BooleanField(default=False)
+    groups = models.ManyToManyField(GroupNumber, blank=True, null=True)
     description = models.CharField(max_length=250, blank=True)
+    date = models.DateField(null=False, default='2020-8-9', verbose_name='Дата')
+    subject_number = models.IntegerField(blank=False, default=1, verbose_name='Номер урока')
+    sub = models.ForeignKey(Subject, verbose_name="Название урока", null=True, on_delete=models.CASCADE)
+    student_name = models.ForeignKey(User, verbose_name='Учащийся', null=True, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.description

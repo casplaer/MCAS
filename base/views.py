@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
-from .models import New, User, About, Message, File, Event
+from .models import New, User, About, Message, File, Event, Task, GroupNumber, Subject
 from django.contrib.auth import authenticate, login, logout
-from .forms import NewForm, RegistrationForm, AboutForm, FileUploadForm, EventCreationForm
+from .forms import NewForm, RegistrationForm, AboutForm, FileUploadForm, EventCreationForm, TaskCreationForm
 from django.shortcuts import get_object_or_404
 
 
@@ -33,6 +33,7 @@ def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username').lower()
         password = request.POST.get('password')
+        print(username, password)
 
         try:
             user = User.objects.get(username = username)
@@ -41,11 +42,11 @@ def loginPage(request):
         user = authenticate(request, username = username, password = password)
 
         if user is not None:
-
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Некорректный логин ИЛИ пароль. Проверьте введённые давнные.')
+            print("123")
+            #messages.error(request, 'Некорректный логин ИЛИ пароль. Проверьте введённые давнные.')
 
 
     context = {'page':page}
@@ -78,13 +79,16 @@ def registerPage(request):
 def userProfile(request, pk):
     user = User.objects.get(id = pk)
     msgs = user.message_set.all().order_by('-created')
+    #subjects = user.subjects.filter()
+    tasks = Task.objects.filter(groups__in=user.groups.all())
     if request.method == 'POST':
         msg = Message.objects.create(
             user = request.user,
             body=request.POST.get('body')
         )
         return redirect('user-profile', request.user.id)
-    context = {'user' : user, 'msgs':msgs}
+    context = {'user' : user, 'msgs':msgs, 'tasks':
+               tasks}
     return render(request, 'base/profile.html', context)
 
 
@@ -242,7 +246,7 @@ def get_theory(request):
 
 
 #def get_uni(request, pk):
-    # events = Event.objects.filter(department=pk).values('title', 'description', 'date')
+    # events = Event.objects.filter(department=pk)
     # return JsonResponse(list(events), safe=False)
 
 
@@ -270,5 +274,19 @@ def student_info(request, pk):
 
 
 def diary(request):
-    context = {'tasks':1}
-    return render(request, 'base/diary.html')
+    user = request.user
+    tasks = Task.objects.all()
+    context = {'tasks':tasks}
+    return render(request, 'base/diary.html', context)
+
+
+def homework(request):
+    form = TaskCreationForm()
+    if request.method == 'POST':
+        form = TaskCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    context = {'form':form}
+    return render(request, 'base/homework.html', context)
