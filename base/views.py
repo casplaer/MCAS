@@ -9,7 +9,7 @@ from .forms import NewForm, RegistrationForm, AboutForm, \
     FileUploadForm, EventCreationForm, TaskCreationForm, \
     FileUUploadForm
 from django.shortcuts import get_object_or_404
-
+import os
 
 # Create your views here.
 
@@ -124,6 +124,12 @@ def deleteNew(request, pk):
     new = New.objects.get(id=pk)
     new.delete()
     return redirect('news')
+
+
+def delete_file(request, pk):
+    file = File.objects.get(id=pk)
+    file.delete()
+    return redirect('music-library')
 
 
 def editNew(request, pk):

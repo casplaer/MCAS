@@ -21,6 +21,7 @@ urlpatterns = [
     path('download/<str:pk>', views.download_file, name = 'file-download'),
     path('udownload/<str:pk>', views.download_ufile, name = 'ufile-download'),
     path('file-uupload/', views.file_uupload, name='file-uupload'),
+    path('delete-file/<str:pk>', views.delete_file, name = 'delete-file'),
 
     path('rewards/', views.rewards, name = 'rewards'),
 
