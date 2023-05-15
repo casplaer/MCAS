@@ -1,35 +1,21 @@
-{% load static %}
+{% extends 'main.html' %}
 
 {% block content %}
-
 {% if page == 'login' %}
-<html lang="ru">
-    <head> 
-        <meta charset="UTF-8"> 
-        <title>Авторизация</title>         
-        <link rel="stylesheet" href="{% static 'styles/autorization.css' %}">
-        <script src="{% static 'styles/scripts/autorization.js' %}"></script>
-        <script>
-            window.onload = function() {
-  document.querySelector('.form').classList.add('show');
-}
-        </script>
-    </head>     
-    <body>
-        <div class="login-page">
-            <div class="form" id="login-form">
-                <div class="form__title"> Авторизация </div>
-                <a href="#" class="popup__close" onclick="history.back()">X</a> 
-                <form class="login-form" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input name="username" type="text" placeholder="Имя пользователя"/>
-                    <input name="password" type="password" placeholder="Пароль"/>
-                    <button type="submit">Вход</button>
-                </form>
-            </div>
-        </div>
-    </body>     
-</html>
+
+    <div>
+        <form method="post" action="">
+            {% csrf_token %}
+
+            <label>Логин:</label>
+            <input type="text" name="username" placeholder="Введите логин">
+
+            <label>Пароль:</label>
+            <input type="password" name="password" placeholder="Введите пароль">
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
 {% else %}
     <div>
         <form method="post" action="" enctype="multipart/form-data">
@@ -41,5 +27,4 @@
         </form>
     </div>
 {% endif %}
-
-{% endblock %}
+{% endblock content%}

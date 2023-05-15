@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <title>Авторизация</title>         
+        <link rel="stylesheet" href="./autorization.css"> 
+        <script src="./scripts/autorization.js"></script>
+        <script>
+            window.onload = function() {
+  document.querySelector('.form').classList.add('show');
+}
+        </script>
+    </head>     
+    <body>
+        <div class="login-page">
+            <div class="form" id="login-form">
+                <div class="form__title"> Авторизация </div>
+                <a href="#" class="popup__close" onclick="history.back()">X</a> 
+                <form class="login-form">
+                    <input id="username" type="text" placeholder="Имя пользователя"/>
+                    <input id="password" type="password" placeholder="Пароль"/>
+                    <button>Вход</button>
+                </form>
+            </div>
+        </div>
+    </body>     
+</html>

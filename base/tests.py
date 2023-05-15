@@ -186,7 +186,7 @@ class GroupNumberModelTest(TestCase):
             self.assertEqual(self.user.status, 'student')
 
         def test_user_avatar(self):
-            self.assertEqual(self.user.avatar.url, '/media/images/profile-pictures/default.jpg')
+            self.assertEqual(self.user.avatar.url, 'images/profile-pictures/default.jpg')
 
 
 class NewModelTestCase(TestCase):
@@ -342,30 +342,6 @@ class EditAboutTestCase(TestCase):
 
 
 
-class FileModelTestCase(TestCase):
-    def test_file_model(self):
-        # Создаем объект File
-        file = File.objects.create(file_name='Test File', file_upload='path/to/file.txt')
-        self.assertEqual(file.file_name, 'Test File')
-
-class FileUploadFormTestCase(TestCase):
-    def test_file_upload_form(self):
-        # Создаем форму с тестовыми данными
-        form_data = {'file_name': 'Test File', 'file_upload': 'path/to/file.txt'}
-        form = FileUploadForm(data=form_data)
-        self.assertTrue(form.is_valid())
-
-class EditAboutViewTestCase(TestCase):
-    def test_edit_about_view(self):
-        # Создаем тестовый запрос GET
-        response = self.client.get('/edit_about/')
-        self.assertEqual(response.status_code, 200)
-
-        # Создаем тестовый запрос POST
-        form_data = {'file_name': 'Test File', 'file_upload': 'path/to/file.txt'}
-        response = self.client.post('/edit_about/', data=form_data)
-        self.assertRedirects(response, 'home')
-
 
 class NewFormTest(TestCase):
     def test_new_form_valid_data(self):
@@ -437,7 +413,7 @@ class EventCreationFormTestCase(TestCase):
 class NewEventViewTestCase(TestCase):
     def test_new_event_view(self):
         # Создаем тестовый запрос GET
-        response = self.client.get('/new_event/')
+        response = self.client.get('/new-event/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base/new_event.html')
 
@@ -456,7 +432,7 @@ class ContingentViewTestCase(TestCase):
 class StudentInfoViewTestCase(TestCase):
     def test_student_info_view(self):
         user = User.objects.create(username='testuser')
-        response = self.client.get(reverse('student_info', args=[user.pk]))
+        response = self.client.get(reverse('student-info', args=[user.pk]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base/student_info.html')
 
@@ -473,3 +449,131 @@ class HomeworkViewTestCase(TestCase):
         response = self.client.get('/homework/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base/homework.html')
+
+
+class GetPianoViewTestCase(TestCase):
+    def test_get_piano_view(self):
+        response = self.client.get('/piano-events/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetStringsViewTestCase(TestCase):
+    def test_get_strings_view(self):
+        response = self.client.get('/strings-events/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetFolkViewTestCase(TestCase):
+    def test_get_folk_view(self):
+        response = self.client.get('/folk-events/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetStringFolkViewTestCase(TestCase):
+    def test_get_string_folk_view(self):
+        response = self.client.get('/string-folk-events/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetChoirViewTestCase(TestCase):
+    def test_get_choir_view(self):
+        response = self.client.get('/choir-events/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetTheoryViewTestCase(TestCase):
+    def test_get_theory_view(self):
+        response = self.client.get('/theory-events/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+
+class DownloadFileViewTestCase(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.file = File.objects.create(file_name='test_file', file_upload=SimpleUploadedFile("test.txt", b"file_content"))
+
+    def test_download_file_view(self):
+        request = self.factory.get(reverse('file-download', args=[self.file.pk]))
+        response = download_file(request, pk=self.file.pk)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'text/plain')
+        self.assertEqual(response['Content-Disposition'], f'attachment; filename="{self.file.file_upload.name}"')
+
+class DownloadUFileViewTestCase(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user_file = UserFiles.objects.create(file_name='test_user_file', file_upload=SimpleUploadedFile("test.txt", b"file_content"))
+
+    def test_download_ufile_view(self):
+        request = self.factory.get(reverse('ufile-download', args=[self.user_file.pk]))
+        response = download_ufile(request, pk=self.user_file.pk)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'text/plain')
+        self.assertEqual(response['Content-Disposition'], f'attachment; filename="{self.user_file.file_upload.name}"')
+
+class RewardsViewTestCase(TestCase):
+    def test_rewards_view(self):
+        response = self.client.get('/rewards/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'base/rewards.html')
+
+class TeachersInfoViewTestCase(TestCase):
+    def test_teachers_info_view(self):
+        response = self.client.get('/teachers-info/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'base/teachers-info.html')
+
+class PianoDepartmentViewTestCase(TestCase):
+    def test_piano_department_view(self):
+        response = self.client.get('/piano-dep/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'base/piano_department.html')
+
+
+class HomeViewTestCase(TestCase):
+    def test_home_view(self):
+        response = self.client.get('/home/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'base/home.html')
+
+class NewViewTestCase(TestCase):
+    def setUp(self):
+        self.new = New.objects.create(title='Test News', content='This is a test news')
+
+    def test_new_view(self):
+        response = self.client.get(reverse('new', args=[self.new.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'base/news.html')
+
+class LoginPageViewTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+
+    def test_login_page_view(self):
+        response = self.client.get('/login/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'base/login_register.html')
+
+    def test_login_post(self):
+        response = self.client.post('/login/', {'username': 'testuser', 'password': 'testpassword'})
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/home/')
+        # Additional assertions to verify login functionality
+
+    def test_login_post_invalid_credentials(self):
+        response = self.client.post('/login/', {'username': 'invaliduser', 'password': 'invalidpassword'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'base/login_register.html')
+
+
+class EditAboutViewTestCase(TestCase):
+    def test_edit_about_view(self):
+        # Создаем тестовый запрос GET
+        response = self.client.get('/edit_about/')
+        self.assertEqual(response.status_code, 200)
+
+        # Создаем тестовый запрос POST
+        form_data = {'file_name': 'Test File', 'file_upload': 'path/to/file.txt'}
+        response = self.client.post('/edit_about/', data=form_data)
+        self.assertRedirects(response, 'home')

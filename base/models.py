@@ -126,7 +126,7 @@ class Task(models.Model):
     date = models.DateField(null=False, default='2020-8-9', verbose_name='Дата')
     subject_number = models.IntegerField(blank=False, default=1, verbose_name='Номер урока')
     sub = models.ForeignKey(Subject, verbose_name="Название урока", null=True, on_delete=models.CASCADE)
-    student_name = models.ForeignKey(User, verbose_name='Учащийся', null=True, on_delete=models.CASCADE)
+    student_name = models.ForeignKey(User, verbose_name='Учащийся', null=True, blank= True, on_delete=models.CASCADE)
 
 
     def __str__(self):
