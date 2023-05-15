@@ -341,16 +341,6 @@ class EditAboutTestCase(TestCase):
         self.assertEqual(updated_about.content, 'New Content')
 
 
-class EditAboutViewTestCase(TestCase):
-    def test_edit_about_view(self):
-        # Создаем тестовый запрос GET
-        response = self.client.get('/edit_about/')
-        self.assertEqual(response.status_code, 200)
-
-        # Создаем тестовый запрос POST
-        form_data = {'file_name': 'Test File', 'file_upload': 'path/to/file.txt'}
-        response = self.client.post('/edit_about/', data=form_data)
-        self.assertRedirects(response, 'home')
 
 
 class NewFormTest(TestCase):
@@ -575,3 +565,15 @@ class LoginPageViewTestCase(TestCase):
         response = self.client.post('/login/', {'username': 'invaliduser', 'password': 'invalidpassword'})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.template_name[0], 'base/login_register.html')
+
+
+class EditAboutViewTestCase(TestCase):
+    def test_edit_about_view(self):
+        # Создаем тестовый запрос GET
+        response = self.client.get('/edit_about/')
+        self.assertEqual(response.status_code, 200)
+
+        # Создаем тестовый запрос POST
+        form_data = {'file_name': 'Test File', 'file_upload': 'path/to/file.txt'}
+        response = self.client.post('/edit_about/', data=form_data)
+        self.assertRedirects(response, 'home')
