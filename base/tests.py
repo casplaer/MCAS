@@ -473,3 +473,40 @@ class HomeworkViewTestCase(TestCase):
         response = self.client.get('/homework/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base/homework.html')
+
+
+class GetPianoViewTestCase(TestCase):
+    def test_get_piano_view(self):
+        response = self.client.get('/get_piano/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetStringsViewTestCase(TestCase):
+    def test_get_strings_view(self):
+        response = self.client.get('/get_strings/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetFolkViewTestCase(TestCase):
+    def test_get_folk_view(self):
+        response = self.client.get('/get_folk/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetStringFolkViewTestCase(TestCase):
+    def test_get_string_folk_view(self):
+        response = self.client.get('/get_string_folk/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetChoirViewTestCase(TestCase):
+    def test_get_choir_view(self):
+        response = self.client.get('/get_choir/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+
+class GetTheoryViewTestCase(TestCase):
+    def test_get_theory_view(self):
+        response = self.client.get('/get_theory/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
