@@ -1,0 +1,18 @@
+.header-pic {
+    position: relative;
+    display: inline-block; /* добавим display: inline-block, чтобы ширина контейнера соответствовала ширине изображения */
+}
+
+.header-pic-pic {
+    width: 100%;
+    height: auto;
+}
+
+.header-text{
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+

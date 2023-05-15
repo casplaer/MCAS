@@ -33,22 +33,8 @@
                         <p>{{ msg.body }}</p>
                     </div>
                 {% endfor %}
-                {% for file in files %}
-                    <div>
-                        <a href="{% url 'ufile-download' file.id %}">{{ file.file_name }}</a>
-                    </div>
-                {% endfor %}
-                <a href = '{% url "contingent" %}'>Контингент</a>
             {% endif %}
-
-            <a href="{% url 'file-uupload' %}">Загрузить файл для персонала</a>
-            <a href="{% url 'homework' %}">Новое ДЗ</a  >
-            <a href="{% url 'diary' %}">Дневник</a>
             <a href="{% url 'logout' %}">Выйти</a>
-        {% for task in tasks %}
-            <div>{{ task.description }}</div>
-            <div>{{ task.sub }}</div>
-        {% endfor %}
         </form>
     </div>
 

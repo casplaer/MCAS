@@ -15,7 +15,7 @@ form.addEventListener('submit', (event) => {
   .then(data => {
     if (data.success) {
       // если данные пользователя верны, перенаправляем его на другую страницу
-      window.location.href = '/home';
+      window.location.href = '/dashboard';
     } else {
       // если данные пользователя неверны, выводим сообщение об ошибке
       alert(data.message);

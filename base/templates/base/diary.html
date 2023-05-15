@@ -1,68 +1,94 @@
-{% extends 'main.html' %}
-
-{% load static %}
-{% block content %}
-    <head>
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
         <meta charset="utf-8"> 
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
         <meta name="description" content=""> 
         <meta name="author" content=""> 
         <!-- Bootstrap core CSS -->         
-        <link href="{% static 'styles/bootstrap_theme/bootstrap.css' %}" rel="stylesheet" type="text/css">
+        <link href="bootstrap_theme/bootstrap.css" rel="stylesheet" type="text/css"> 
         <!-- Custom styles for this template -->         
-        <link rel="stylesheet" href="{% static 'styles/blocks.css' %}">
-        <link href="{% static 'styles/style.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="blocks.css"> 
+        <link href="style.css" rel="stylesheet"> 
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js'></script>         
-        <link rel="stylesheet" href="{% static 'styles/diary.css' %}">
-        <title>Струнное отделение</title>         
-    </head>
+        <link rel="stylesheet" href="./diary.css"> 
+        <script src="./js/diary.js"></script>
+        <title>Дневник учащегося</title>         
+    </head>     
+    <body class="text-muted"> 
+        <header class="bg-secondary"> 
+            <nav class="navbar navbar-dark navbar-expand-lg pb-3 pt-3 shadow-none"> 
+                <div class="container"> <a class="navbar-brand text-white" href="#"> <img src="./sources/emblem.png" alt="Логотип" class="me-2"> <span class="align-middle fw-bold h4 ms-1">МДШИ</span></a> 
+                    <button class="navbar-toggler rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown-2" aria-controls="navbarNavDropdown-2" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> 
+                    </button>                     
+                    <div class="collapse navbar-collapse " id="navbarNavDropdown-2"> 
+                        <ul class="ms-auto navbar-nav"> 
+                            <li class="nav-item"> <a class="active nav-link pb-lg-3 pe-lg-4 ps-lg-4 pt-lg-3" aria-current="page" href="./index.html">Главная</a> 
+                            </li>                             
+                            <li class="nav-item"> <a class="nav-link pb-lg-3 pe-lg-4 ps-lg-4 pt-lg-3" href="music_library.html">Музыкальная библиотека</a> 
+                            </li>                             
+                            <li class="nav-item"> <a class="nav-link pb-lg-3 pe-lg-4 ps-lg-4 pt-lg-3" href="autorization.html">Личный кабинет</a> 
+                            </li>                             
+                            <li class="nav-item"> <a class="nav-link pb-lg-3 pe-lg-4 ps-lg-4 pt-lg-3" href="#">Новости</a> 
+                            </li>                             
+                            <li class="nav-item"> 
+</li>                             
+                            <li class="nav-item"> 
+</li>                             
+                        </ul>                         
+                    </div>                     
+                </div>                 
+            </nav>             
+        </header>         
         <main> 
-            <section class="bg-light pb-5 pt-5 teachers" style="display: flex;">
-
-                {% for task in tasks %}
-                    <div>{{ task.description }}</div>
-                {% endfor %}
-
+            <section class="bg-light pb-5 pt-5 teachers" style="display: flex;"> 
                 <div class="tables">
+                    <div class="tables-header" id="thr">На сцене</div>
                     <div class="s_table">
                         <h3>Понедельник</h3>
                         <div class="table-responsive">
                             <table class="table"> 
+                                <colgroup>
+                                    <col style="width: 20%;">
+                                    <col style="width: 20%;">
+                                    <col style="width: 50%;">
+                                    <col style="width: 10%;">
+                                </colgroup>
                                 <thead> 
                                     <tr> 
-                                        <th scope="col">Дата</th> 
-                                        <th scope="col">Предмет</th> 
-                                        <th scope="col">Домашнее задание</th> 
-                                        <th scope="col">Оценка</th> 
+                                        <th scope="col" class="text-center">Дата</th> 
+                                        <th scope="col" class="text-center">Предмет</th> 
+                                        <th scope="col" class="text-center">Домашнее задание</th> 
+                                        <th scope="col" class="text-center">Оценка</th> 
                                     </tr>                                     
                                 </thead>                                 
                                 <tbody> 
                                     <tr> 
-                                        <th rowspan="5" class="date" id="mon-date">1</th> 
-                                        <td></td> 
-                                        <td></td> 
-                                        <td></td> 
+                                        <th rowspan="5" class="date text-center" id="mon-date"></th> 
+                                        <td class="text-center"></td> 
+                                        <td class="text-center"></td> 
+                                        <td class="text-center"></td> 
                                     </tr>                                     
                                     <tr> 
-                                        <td></td> 
-                                        <td></td> 
-                                        <td></td>
+                                        <td class="text-center"></td> 
+                                        <td class="text-center"></td> 
+                                        <td class="text-center"></td>
                                     </tr>                                     
                                     <tr> 
-                                        <td></td> 
-                                        <td></td> 
+                                        <td class="text-center"></td> 
+                                        <td class="text-center"></td> 
                                         <td></td> 
                                     </tr>
                                     <tr> 
-                                        <td></td> 
-                                        <td> </td> 
-                                        <td></td> 
+                                        <td class="text-center"></td> 
+                                        <td class="text-center"> </td> 
+                                        <td class="text-center"></td> 
                                     </tr>                                     
                                     <tr> 
-                                        <td></td> 
-                                        <td></td> 
-                                        <td></td> 
+                                        <td class="text-center"></td> 
+                                        <td class="text-center"></td> 
+                                        <td class="text-center"></td> 
                                     </tr>                                     
                                 </tbody>                                 
                             </table>
@@ -70,8 +96,14 @@
                     </div>
                     <div class="s_table">
                         <h3>Вторник</h3>
-                        <div class="table-responsive">
+                        <div class="table-responsive text-center">
                             <table class="table"> 
+                                <colgroup>
+                                    <col style="width: 20%;">
+                                    <col style="width: 20%;">
+                                    <col style="width: 50%;">
+                                    <col style="width: 10%;">
+                                </colgroup>
                                 <thead> 
                                     <tr> 
                                         <th scope="col">Дата</th> 
@@ -82,7 +114,7 @@
                                 </thead>                                 
                                 <tbody> 
                                     <tr> 
-                                        <th rowspan="5" class="date" id="tue-date">1</th> 
+                                        <th rowspan="5" class="date" id="tue-date"></th> 
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
@@ -106,26 +138,32 @@
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
-                                    </tr>                           
+                                    </tr>                                     
                                 </tbody>                                 
                             </table>
                         </div>
                     </div>
                     <div class="s_table">
                         <h3>Среда</h3>
-                        <div class="table-responsive">
+                        <div class="align-middle table-responsive text-center">
                             <table class="table"> 
+                                <colgroup>
+                                    <col style="width: 20%;">
+                                    <col style="width: 20%;">
+                                    <col style="width: 50%;">
+                                    <col style="width: 10%;">
+                                </colgroup>
                                 <thead> 
                                     <tr> 
-                                        <th scope="col">Дата</th> 
-                                        <th scope="col">Предмет</th> 
-                                        <th scope="col">Домашнее задание</th> 
-                                        <th scope="col">Оценка</th> 
+                                        <th scope="col" class="align-middle">Дата</th> 
+                                        <th scope="col" class="align-middle">Предмет</th> 
+                                        <th scope="col" class="align-middle">Домашнее задание</th> 
+                                        <th scope="col" class="align-middle">Оценка</th> 
                                     </tr>                                     
                                 </thead>                                 
                                 <tbody> 
                                     <tr> 
-                                        <th rowspan="5" class="date" id="wed-date">1</th> 
+                                        <th rowspan="5" class="date" id="wed-date"></th> 
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
@@ -149,15 +187,21 @@
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
-                                    </tr>                                            
+                                    </tr>                                     
                                 </tbody>                                 
                             </table>
                         </div>
                     </div>
                     <div class="s_table">
                         <h3>Четверг</h3>
-                        <div class="table-responsive">
+                        <div class="align-middle table-responsive text-center">
                             <table class="table"> 
+                                <colgroup>
+                                    <col style="width: 20%;">
+                                    <col style="width: 20%;">
+                                    <col style="width: 50%;">
+                                    <col style="width: 10%;">
+                                </colgroup>
                                 <thead> 
                                     <tr> 
                                         <th scope="col">Дата</th> 
@@ -168,7 +212,7 @@
                                 </thead>                                 
                                 <tbody> 
                                     <tr> 
-                                        <th rowspan="5" class="date" id="thu-date">1</th> 
+                                        <th rowspan="5" class="date" id="thu-date"></th> 
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
@@ -192,15 +236,21 @@
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
-                                    </tr>                                         
+                                    </tr>                                     
                                 </tbody>                                 
                             </table>
                         </div>
                     </div>
                     <div class="s_table">
                         <h3>Пятница</h3>
-                        <div class="table-responsive">
+                        <div class="table-responsive text-center">
                             <table class="table"> 
+                                <colgroup>
+                                    <col style="width: 20%;">
+                                    <col style="width: 20%;">
+                                    <col style="width: 50%;">
+                                    <col style="width: 10%;">
+                                </colgroup>
                                 <thead> 
                                     <tr> 
                                         <th scope="col">Дата</th> 
@@ -211,7 +261,7 @@
                                 </thead>                                 
                                 <tbody> 
                                     <tr> 
-                                        <th rowspan="5" class="date" id="fri-date">1</th> 
+                                        <th rowspan="5" class="date" id="fri-date"></th> 
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
@@ -235,15 +285,21 @@
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
-                                    </tr>                                            
+                                    </tr>                                     
                                 </tbody>                                 
                             </table>
                         </div>
                     </div>
                     <div class="s_table">
                         <h3>Суббота</h3>
-                        <div class="table-responsive">
+                        <div class="table-responsive text-center">
                             <table class="table"> 
+                                <colgroup>
+                                    <col style="width: 20%;">
+                                    <col style="width: 20%;">
+                                    <col style="width: 50%;">
+                                    <col style="width: 10%;">
+                                </colgroup>
                                 <thead> 
                                     <tr> 
                                         <th scope="col">Дата</th> 
@@ -254,7 +310,7 @@
                                 </thead>                                 
                                 <tbody> 
                                     <tr> 
-                                        <th rowspan="5" class="date" id="sat-date">1</th> 
+                                        <th rowspan="5" class="date" id="sat-date"></th> 
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
@@ -278,23 +334,53 @@
                                         <td></td> 
                                         <td></td> 
                                         <td></td> 
-                                    </tr>                                         
+                                    </tr>                                     
                                 </tbody>                                 
                             </table>
                         </div>
                     </div>
-                </div>
+                </div>                 
             </section>             
-
+            <section class="bg-light pb-5 pt-5 text-center">
+</section>             
+            <section class="bg-secondary pb-5 pt-5 text-center text-lg-start text-white"> 
                 <div class="container pb-3 pt-3"> 
 </div>                 
             </section>             
         </main>         
-
+        <footer class="bg-dark pt-5 text-white"> 
+            <div class="container"> 
+                <div class="row"> 
+                    <div class="col-md-3 col-xl-2 py-3"> 
+                        <h2 class="fw-bold h5 mb-4 text-primary text-uppercase">Как нас найти</h2> 
+                        <ul class="list-unstyled"> 
+                            <li class="mb-3"> <a href="#" class="link-light">Минская обл.</a> 
+                            </li>                             
+                            <li class="mb-3"> <a href="#" class="link-light">г. Марьина Горка</a> 
+                            </li>                             
+                            <li class="mb-3"> <a href="#" class="link-light">ул. Новая Заря</a> 
+                            </li>                             
+                            <li class="mb-3"> <a href="#" class="link-light">222827</a> 
+                            </li>                             
+                        </ul>                         
+                    </div>                     
+                    <div class="col-md-4 col-xl-2 py-3"> 
+                        <h2 class="fw-bold h5 mb-4 text-primary text-uppercase">Как с нами связаться</h2> 
+                        <ul class="list-unstyled"> 
+                            <li class="mb-3"> <a href="#" class="link-light">8 (01713) 56-3-32 (директор)</a> 
+                            </li>                             
+                            <li class="mb-3"> <a href="#" class="link-light">8 (01713) 45-8-09 (приёмная)</a> 
+                            </li>                             
+                        </ul>                         
+                    </div>                     
+                    <div class="col-lg-4 col-md-6 col-xl-4 py-3"> 
+                        <h2 class="fw-bold h5 mb-4 text-primary text-uppercase">Регистрационный номер:&nbsp;</h2> <a href="#" class="link-light"><u>691068629</u></a> 
+                    </div>                     
+                </div>                 
+                <div class="pb-3 pt-3 small"> 
 </div>                 
             </div>             
         </footer>         
-        <script src="{% static 'styles/assets/js/popper.min.js' %}"></script>
-        <script src="{% static 'styles/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="assets/js/popper.min.js"></script>         
+        <script src="bootstrap/js/bootstrap.min.js"></script>         
     </body>
-{% endblock content %}

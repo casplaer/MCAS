@@ -1,18 +1,13 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-    {% for file in files %}
+    {% for file in files  %}
         <div>
-            <a href="{% url 'file-download' file.id %}">{{ file.file_name }}</a>
-            <a href="{% url 'delete-file' file.id %}" style="text-decoration: none; color: black;">
-              <span style="display: inline-block; width: 20px; height: 20px;
-               line-height: 20px; text-align: center; background-color: black; color: white;">X</span>
-            </a>
+        <a href="{% url 'file-download' file.id %}" download>{{ file.file_name }}</a>
         </div>
     {% endfor %}
 
-    {% if user.status == 'teacher' or user.is_staff %}
+    {% if request.user.is_staff or request.user.status == 'teacher' %}
         <a href="{% url 'file-upload' %}">Загрузить новый файл</a>
     {% endif %}
-{% endblock %}
+{% endblock content %}
